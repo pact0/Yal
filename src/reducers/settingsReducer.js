@@ -1,14 +1,11 @@
 const initialState = [
-  { id: 1, show: true, name: "main" },
+  { id: 1, show: true, name: "appearance" },
   { id: 2, show: false, name: "weather" },
-  { id: 3, show: false, name: "toDo" },
-  { id: 4, show: false, name: "pomodoro" },
-  { id: 5, show: false, name: "plot" },
-  { id: 6, show: false, name: "fluff" },
-  { id: 7, show: false, name: "settings" },
+  { id: 3, show: false, name: "pomodoro" },
+  { id: 4, show: false, name: "analitics" },
 ];
 
-const pagesReducer = (state = initialState, action) => {
+const settingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case "SHOW":
       const current = state.map((x) => {
@@ -26,7 +23,7 @@ const pagesReducer = (state = initialState, action) => {
         return x;
       });
       return [...curren];
-    case "SHOW_ONE":
+    case "SHOW_ONE_SETTING":
       const curr = state.map((x) => {
         if (x.id !== action.data.id) {
           return { ...x, show: false };
@@ -52,11 +49,11 @@ export const hidePage = (id) => {
     data: { id },
   };
 };
-export const showOne = (id) => {
+export const showOneSetting = (id) => {
   console.log(id);
   return {
-    type: "SHOW_ONE",
+    type: "SHOW_ONE_SETTING",
     data: { id },
   };
 };
-export default pagesReducer;
+export default settingsReducer;

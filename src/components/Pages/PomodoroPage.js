@@ -15,41 +15,43 @@ const Container = styled.div`
   justify-content: center;
   padding: 10px;
 `;
-
-const BoopButton = () => {
-  const [play] = useSound(alarm);
-
-  return <button onClick={play}>Boop!</button>;
-};
+const Button = styled.button`
+  background: transparent;
+  border: none;
+  color: var(--accent-color);
+  font-size: 24px;
+`;
 
 const PomodoroPage = () => {
   const hidden = useSelector((state) => state.pages[3].show);
-  const [minute, setMinute] = useState(Pomodoro.getMinutes() || 25);
-  const [second, setSecond] = useState(Pomodoro.getSeconds() || 0);
+  const [minute, setMinute] = useState(Pomodoro.getCurrentMinutes() || 25);
+  const [second, setSecond] = useState(Pomodoro.getCurrentSeconds() || 0);
 
-  const [timerOn, setTimerOn] = useState(false);
+  const [timerOn, setTimerOn] = useState(Pomodoro.getTimer() || false);
+
   const [timerDone, setTimerDone] = useState(true);
 
   const [sessionType, setSessionType] = useState("Work");
 
   const [play] = useSound(alarm);
 
+  const toggleTimer = () => {
+    Pomodoro.setTimer(!timerOn);
+    setTimerOn(!timerOn);
+  };
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timerOn) {
+      if (timerOn && sessionType === "Work") {
         clearInterval(interval);
         if (second === 0) {
           if (minute !== 0) {
             setSecond(59);
+            Pomodoro.setCurrentMinutes(minute - 1);
             setMinute(minute - 1);
-          } else {
-            let minute = 24;
-            let second = 59;
-
-            setSecond(second);
-            setMinute(minute);
+            Pomodoro.setCurrentSeconds(second);
           }
         } else {
+          Pomodoro.setCurrentSeconds(second - 1);
           setSecond(second - 1);
         }
       }
@@ -60,7 +62,7 @@ const PomodoroPage = () => {
     return () => {
       clearInterval(interval);
     };
-  }, [timerOn, second]);
+  }, [timerOn, second, minute, sessionType]);
 
   useEffect(() => {
     if (second === 0 && minute === 0) {
@@ -72,16 +74,16 @@ const PomodoroPage = () => {
         if (prevType === "Break") return "Work";
       });
     }
-  }, [second]);
+  }, [second, minute, play]);
 
   useEffect(() => {
-    if (sessionType === "Work") {
-      setMinute(Pomodoro.getMinutes() || 25);
+    if (sessionType === "Work" && minute === 0 && second === 0) {
+      setMinute(Pomodoro.getWorkMinutes() || 25);
     }
-    if (sessionType === "Break") {
+    if (sessionType === "Break" && minute === 0 && second === 0) {
       setMinute(Pomodoro.getBreakMinutes() || 5);
     }
-  }, [sessionType, timerDone]);
+  }, [sessionType, timerDone, minute, second]);
 
   const timerMinutes = minute < 10 ? `0${minute}` : minute;
   const timerSeconds = second < 10 ? `0${second}` : second;
@@ -91,11 +93,11 @@ const PomodoroPage = () => {
       <>
         {hidden && (
           <Container>
-            {timerMinutes} : {timerSeconds}
             {/* <button onClick={() => clearInterval(interval)}>Pause</button>
             <button onClick={inter}>Start</button> */}
-            <button onClick={() => setTimerOn(!timerOn)}>toggle</button>
-            <BoopButton>sound</BoopButton>
+            <Button onClick={toggleTimer}>
+              {timerMinutes} : {timerSeconds}
+            </Button>
           </Container>
         )}
       </>

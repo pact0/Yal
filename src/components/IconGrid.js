@@ -4,6 +4,13 @@ import styled from "@emotion/styled";
 
 const A = styled.a`
   color: "blue";
+  margin: 0px 10px;
+  width: 64px;
+  heigth: 64px;
+  object-fit: contain;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 const IconGrid = ({ children }) => {
   return (

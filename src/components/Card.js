@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import MainPage from "./Pages/MainPage";
 import styled from "@emotion/styled";
 import ButtonsOnLeft from "./ButtonsOnLeft";
@@ -12,11 +12,6 @@ import FluffPage from "./Pages/FluffPage";
 const Container = styled.div`
   height: 240px;
   width: 420px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +30,7 @@ const CardWrap = styled.div`
   flex-direction: row;
 `;
 
-const WholePage = () => {
+const Card = () => {
   return (
     <Container>
       <ButtonsOnLeft />
@@ -52,4 +47,4 @@ const WholePage = () => {
   );
 };
 
-export default WholePage;
+export default Card;

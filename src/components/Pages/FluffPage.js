@@ -1,7 +1,6 @@
 import styled from "@emotion/styled/";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
 
 const Container = styled.div`
   height: 65%;

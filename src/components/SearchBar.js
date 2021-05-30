@@ -2,22 +2,23 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 
 const Input = styled.input`
+  margin: 10px 0px;
   color: var(--accent-color);
   background: transparent;
   border: none;
   text-align: center;
   caret-color: var(--accent-color2);
+  outline: none;
+  :hover,
   :focus {
     animation: text-flicker 4s ease-out 0s infinite normal;
-    animation: box-flicker 4s ease-out 0s infinite normal;
-    outline: none;
   }
 `;
 const SearchBar = () => {
   const [value, setValue] = useState("");
   const [placeholder, setPlaceholder] = useState("-d | -y | -w | -r | -h");
 
-  const handleAnswerChange = (event) => {
+  const handleEnterPress = (event) => {
     if (event.key === "Enter") {
       if (value === "") {
         setPlaceholder("Type something here please");
@@ -93,7 +94,7 @@ const SearchBar = () => {
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
-      onKeyPress={handleAnswerChange}
+      onKeyPress={handleEnterPress}
     />
   );
 };

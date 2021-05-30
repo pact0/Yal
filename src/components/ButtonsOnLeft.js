@@ -3,15 +3,9 @@ import CardSwitchButton from "./CardSwitchButton";
 import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import { showOne } from "../reducers/pagesReducer";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faMoon } from "@fortawesome/free-solid-svg-icons";
 
-import AppsIcon from "@material-ui/icons/Apps";
-import WbSunnyIcon from "@material-ui/icons/WbSunny";
-import BallotIcon from "@material-ui/icons/Ballot";
-const LightUp = styled.div`
-  :hover {
-    background: blue;
-  }
-`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,16 +18,11 @@ const ButtonsOnLeft = (clickHandler) => {
 
   return (
     <Container>
-      <LightUp>
-        <CardSwitchButton clickHandler={onClick} value={1}>
-          <AppsIcon />
-        </CardSwitchButton>
-      </LightUp>
-      <CardSwitchButton clickHandler={onClick} value={2}>
-        <WbSunnyIcon />
+      <CardSwitchButton clickHandler={onClick} value={1}>
+        <FontAwesomeIcon icon={faHome} />
       </CardSwitchButton>
-      <CardSwitchButton clickHandler={onClick} value={3}>
-        <BallotIcon />
+      <CardSwitchButton clickHandler={onClick} value={2}>
+        <FontAwesomeIcon icon={faMoon} />
       </CardSwitchButton>
     </Container>
   );

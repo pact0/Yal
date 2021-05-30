@@ -104,8 +104,8 @@ export const ToDo = {
 };
 
 export const PomodoroPage = {
-  getMinutes: () => {
-    const minutes = localStorage.getItem("minutes");
+  getWorkMinutes: () => {
+    const minutes = localStorage.getItem("workMinutes");
     if (!!minutes) return JSON.parse(minutes);
     return undefined;
   },
@@ -114,18 +114,51 @@ export const PomodoroPage = {
     if (!!minutes) return JSON.parse(minutes);
     return undefined;
   },
-  getSeconds: () => {
-    const seconds = localStorage.getItem("seconds");
+  getWorkSeconds: () => {
+    const seconds = localStorage.getItem("workSeconds");
     if (!!seconds) return JSON.parse(seconds);
     return undefined;
   },
-  setMinutes: (minutes) => {
-    localStorage.setItem("minutes", JSON.stringify(minutes));
+  getBreakSeconds: () => {
+    const seconds = localStorage.getItem("breakSeconds");
+    if (!!seconds) return JSON.parse(seconds);
+    return undefined;
+  },
+  setWorkMinutes: (minutes) => {
+    localStorage.setItem("workMinutes", JSON.stringify(minutes));
   },
   setBreakMinutes: (minutes) => {
     localStorage.setItem("breakMinutes", JSON.stringify(minutes));
   },
-  setSeconds: (seconds) => {
-    localStorage.setItem("seconds", JSON.stringify(seconds));
+  setWorkSeconds: (seconds) => {
+    localStorage.setItem("workSeconds", JSON.stringify(seconds));
+  },
+  setBreakSeconds: (seconds) => {
+    localStorage.setItem("breakSeconds", JSON.stringify(seconds));
+  },
+
+  getCurrentMinutes: () => {
+    const minutes = localStorage.getItem("currentMinutes");
+    if (!!minutes) return JSON.parse(minutes);
+    return undefined;
+  },
+  getCurrentSeconds: () => {
+    const minutes = localStorage.getItem("currentSeconds");
+    if (!!minutes) return JSON.parse(minutes);
+    return undefined;
+  },
+  setCurrentMinutes: (seconds) => {
+    localStorage.setItem("currentMinutes", JSON.stringify(seconds));
+  },
+  setCurrentSeconds: (seconds) => {
+    localStorage.setItem("currentSeconds", JSON.stringify(seconds));
+  },
+  getTimer: () => {
+    const timer = localStorage.getItem("pomodoroTimer");
+    if (!!timer) return JSON.parse(timer);
+    return undefined;
+  },
+  setTimer: (timer) => {
+    localStorage.setItem("pomodoroTimer", JSON.stringify(timer));
   },
 };

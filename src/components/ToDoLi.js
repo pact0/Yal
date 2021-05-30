@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 import { IconButton } from "@material-ui/core";
-import React, { useEffect } from "react";
+import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import CheckIcon from "@material-ui/icons/Check";
-import { ToDo } from "../settings/updateSettings";
 
 const Wrapper = styled.div`
   display: flex;
