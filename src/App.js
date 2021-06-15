@@ -1,17 +1,21 @@
 import React from "react";
+import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./variables.css";
 import styled from "@emotion/styled";
 import Card from "./components/Card";
 import * as Settings from "./settings/updateSettings";
 import Picture from "./components/Picture";
-import { useDispatch } from "react-redux";
 import SettingsCard from "./components/Pages/Settings/SettingsCard";
+import { useDispatch } from "react-redux";
+import { showPage } from "./reducers/pagesReducer";
+import CardSwitchButton from "./components/CardSwitchButton";
 const Wrap = styled.div`
   max-width: 1920px;
   height: 100%;
   position: relative;
-  background: brown;
+  background: --var(bg-color);
 `;
 const Container = styled.div`
   height: 240px;
@@ -30,6 +34,7 @@ const Container = styled.div`
 const App = () => {
   //Apply colors
   const dispatch = useDispatch();
+
   const root = document.documentElement;
   const colors = Settings.Design.getWithFallback().colors;
   Object.keys(colors).forEach((key) => {
@@ -38,15 +43,15 @@ const App = () => {
 
   return (
     <Wrap>
-      {/* <div style={{ float: "right", margin: 10 }}>
+      <div style={{ float: "right", margin: 10 }}>
         <CardSwitchButton
           value={7}
           clickHandler={(value) => dispatch(showPage(value))}
           style={{ float: "right" }}
         >
-          <SettingsIcon />
+          <FontAwesomeIcon icon={faCog} />
         </CardSwitchButton>
-      </div> */}
+      </div>
 
       <Container>
         <Picture />

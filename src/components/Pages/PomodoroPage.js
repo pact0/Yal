@@ -1,7 +1,7 @@
 import styled from "@emotion/styled/";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PomodoroPage as Pomodoro } from "../../settings/updateSettings";
 import useSound from "use-sound";
 import alarm from "../../sounds/alarm.mp3";
@@ -18,7 +18,7 @@ const Container = styled.div`
 const Button = styled.button`
   background: transparent;
   border: none;
-  color: var(--accent-color);
+  color: var(--text);
   font-size: 24px;
 `;
 
@@ -90,7 +90,7 @@ const PomodoroPage = () => {
 
   return (
     <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>
+      <React.Fragment>
         {hidden && (
           <Container>
             {/* <button onClick={() => clearInterval(interval)}>Pause</button>
@@ -100,7 +100,7 @@ const PomodoroPage = () => {
             </Button>
           </Container>
         )}
-      </>
+      </React.Fragment>
     </CSSTransition>
   );
 };

@@ -7,21 +7,21 @@ const Button = styled.button`
   margin: 5px 0px;
   background: transparent;
   border: none;
-  color: var(--accent-color2);
+  color: var(--icon-color);
   font-size: 20px;
   padding: 2px;
   border-radius: 15px;
   :hover {
-    color: var(--accent-color);
+    color: var(--icon-hover);
     scale: 1.4;
   }
   transition: all 0.1s ease-in-out;
 `;
 const CardSwitchButton = ({ value, clickHandler, children }) => {
   return (
-    <>
+    <div>
       <Button onClick={() => clickHandler(value)}>{children}</Button>
-    </>
+    </div>
   );
 };
 

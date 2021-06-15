@@ -42,7 +42,7 @@ const WeatherCard = () => {
     Weather.setKey(apiValue);
   };
   return (
-    <>
+    <div>
       {hidden && (
         <div>
           Change your weather settings
@@ -63,7 +63,7 @@ const WeatherCard = () => {
           </Form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

@@ -27,14 +27,14 @@ const CardWrap = styled.div`
   border-radius: 15px;
   justify-content: center;
   align-items: center;
-  flex-direction: row;
+  background: var(--card-color);
 `;
 
 const Card = () => {
   return (
     <Container>
       <ButtonsOnLeft />
-      <CardWrap>
+      <CardWrap className="CardWrap">
         <MainPage />
         <WeatherPage />
         <ToDoPage />

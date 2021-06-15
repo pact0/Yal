@@ -1,4 +1,5 @@
 import styled from "@emotion/styled/";
+import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
 import { IconButton } from "@material-ui/core";
@@ -41,7 +42,7 @@ const SettingsCard = () => {
   console.log(useSelector((state) => state.settingsPages));
   return (
     <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>
+      <React.Fragment>
         {hidden && (
           <Box>
             <Container>
@@ -73,7 +74,7 @@ const SettingsCard = () => {
             </Container>
           </Box>
         )}
-      </>
+      </React.Fragment>
     </CSSTransition>
   );
 };

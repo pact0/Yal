@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 
 const Input = styled.input`
   margin: 10px 0px;
-  color: var(--accent-color);
+  color: var(--text);
   background: transparent;
   border: none;
   text-align: center;
@@ -11,7 +11,6 @@ const Input = styled.input`
   outline: none;
   :hover,
   :focus {
-    animation: text-flicker 4s ease-out 0s infinite normal;
   }
 `;
 const SearchBar = () => {

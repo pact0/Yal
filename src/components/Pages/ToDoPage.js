@@ -1,7 +1,7 @@
 import styled from "@emotion/styled/";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import List from "@material-ui/core/List";
 import { ToDo } from "../../settings/updateSettings";
 import ToDoLi from "../ToDoLi";
@@ -16,13 +16,13 @@ const Container = styled.div`
   padding: 10px;
 `;
 const Input = styled.input`
-  color: var(--accent-color);
+  color: var(--text);
   width: 80%;
   font-size: 12px;
   background: transparent;
   border: none;
   text-align: center;
-  caret-color: var(--accent-color2);
+  caret-color: var(--text);
   :focus {
     animation: text-flicker 4s ease-out 0s infinite normal;
     animation: box-flicker 4s ease-out 0s infinite normal;
@@ -73,9 +73,9 @@ const ToDoPage = () => {
   useEffect(() => {}, [toDo]);
   return (
     <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>
+      <React.Fragment>
         {hidden && (
-          <>
+          <React.Fragment>
             <Container>
               <Input
                 type="text"
@@ -89,7 +89,7 @@ const ToDoPage = () => {
                   style={{
                     maxHeight: "100%",
                     overflow: "auto",
-                    "scrollbar-width": "none",
+                    scrollbarWidth: "none",
                   }}
                 >
                   {toDo &&
@@ -106,9 +106,9 @@ const ToDoPage = () => {
                 </List>
               </Con>
             </Container>
-          </>
+          </React.Fragment>
         )}
-      </>
+      </React.Fragment>
     </CSSTransition>
   );
 };

@@ -1,7 +1,6 @@
 import styled from "@emotion/styled/";
-import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Weather } from "../../settings/updateSettings";
 
 const Container = styled.div`
@@ -14,14 +13,12 @@ const Container = styled.div`
   padding: 10px;
 `;
 const Input = styled.input`
-  color: var(--accent-color);
+  color: var(--text);
   background: transparent;
   border: none;
   text-align: center;
-  caret-color: var(--accent-color2);
+  caret-color: var(--text);
   :focus {
-    animation: text-flicker 4s ease-out 0s infinite normal;
-    animation: box-flicker 4s ease-out 0s infinite normal;
     outline: none;
   }
   margin: 10px 0px;
@@ -35,7 +32,7 @@ const Form = styled.div`
   justify-content: center;
 `;
 const WeatherImg = styled.img`
-  color: "blue";
+  color: var(--text);
   width: 70px;
   height: 70px;
   max-width: 70px;
@@ -45,7 +42,7 @@ const WeatherImg = styled.img`
 const Button = styled.button`
   border: none;
   background: transparent;
-  color: var(--accent-color);
+  color: var(--text);
   margin: 10px 0px;
   font-size: 16px;
 `;
@@ -55,7 +52,7 @@ const WeatherBox = styled.div`
   align-items: center;
 `;
 const Desc = styled.div`
-  color: var(--accent-color);
+  color: var(--text);
   font-size: 16px;
 `;
 const WeatherPage = () => {
@@ -81,9 +78,9 @@ const WeatherPage = () => {
     }
   };
   useEffect(() => {
-    async function fun() {
+    function fun() {
       if (cityName && key)
-        await fetch(
+        fetch(
           `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`
         )
           .then(function (response) {
@@ -115,50 +112,48 @@ const WeatherPage = () => {
   };
 
   return (
-    <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>
-        {hidden && (
-          <Container>
-            {weather ? (
-              <WeatherBox>
-                {
-                  <WeatherImg
-                    src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
-                  />
-                }
-                <Desc>{weather?.desc}</Desc>
-                <Button onClick={toggleTemperature}>
-                  {temperature ? (
-                    <>{weather?.celsius}°C</>
-                  ) : (
-                    <>{weather?.fahrenheit}°F</>
-                  )}
-                </Button>
-              </WeatherBox>
-            ) : (
-              <>
-                <Form>
-                  <Input
-                    type="text"
-                    placeholder="Town"
-                    value={cityValue}
-                    onChange={(e) => setCityValue(e.target.value)}
-                    onKeyPress={handleEnterPress}
-                  />
-                  <Input
-                    type="text"
-                    placeholder="API key"
-                    value={apiValue}
-                    onChange={(e) => setApiValue(e.target.value)}
-                    onKeyPress={handleEnterPress}
-                  />
-                </Form>
-              </>
-            )}
-          </Container>
-        )}
-      </>
-    </CSSTransition>
+    <React.Fragment>
+      {hidden && (
+        <Container>
+          {weather ? (
+            <WeatherBox>
+              {
+                <WeatherImg
+                  src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
+                />
+              }
+              <Desc>{weather.desc}</Desc>
+              <Button onClick={toggleTemperature}>
+                {temperature ? (
+                  <span>{weather.celsius}°C</span>
+                ) : (
+                  <span>{weather.fahrenheit}°F</span>
+                )}
+              </Button>
+            </WeatherBox>
+          ) : (
+            <div>
+              <Form>
+                <Input
+                  type="text"
+                  placeholder="Town"
+                  value={cityValue}
+                  onChange={(e) => setCityValue(e.target.value)}
+                  onKeyPress={handleEnterPress}
+                />
+                <Input
+                  type="text"
+                  placeholder="API key"
+                  value={apiValue}
+                  onChange={(e) => setApiValue(e.target.value)}
+                  onKeyPress={handleEnterPress}
+                />
+              </Form>
+            </div>
+          )}
+        </Container>
+      )}
+    </React.Fragment>
   );
 };
 

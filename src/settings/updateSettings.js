@@ -26,7 +26,7 @@ export const Design = {
   getWithFallback: () => {
     try {
       return Design.get() || themes[0];
-    } catch {
+    } catch (error) {
       console.error("Your currently applied design appears to be corrupted.");
       return themes[0];
     }

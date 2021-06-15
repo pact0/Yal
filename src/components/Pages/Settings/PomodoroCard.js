@@ -48,7 +48,7 @@ const PomodoroCard = () => {
   };
 
   return (
-    <>
+    <div>
       {hidden && (
         <div>
           Change your pomodoro settings
@@ -83,7 +83,7 @@ const PomodoroCard = () => {
           </Form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

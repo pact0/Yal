@@ -1,5 +1,5 @@
 import styled from "@emotion/styled/";
-import { CSSTransition } from "react-transition-group";
+import React from "react";
 import { useSelector } from "react-redux";
 
 const Container = styled.div`
@@ -16,9 +16,7 @@ const FluffPage = () => {
   const hidden = useSelector((state) => state.pages[5].show);
 
   return (
-    <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>{hidden && <Container>Fluff</Container>}</>
-    </CSSTransition>
+    <React.Fragment>{hidden && <Container>Fluff</Container>}</React.Fragment>
   );
 };
 

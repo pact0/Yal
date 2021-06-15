@@ -1,4 +1,5 @@
 import styled from "@emotion/styled/";
+import React from "react";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
 
@@ -17,7 +18,9 @@ const AnaliticsPage = () => {
 
   return (
     <CSSTransition in={hidden} timeout={200} classNames="my-node">
-      <>{hidden && <Container>Analitics</Container>}</>
+      <React.Fragment>
+        {hidden && <Container>Analitics</Container>}
+      </React.Fragment>
     </CSSTransition>
   );
 };

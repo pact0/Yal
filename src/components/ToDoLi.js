@@ -15,7 +15,7 @@ const TextNotDone = styled.div`
   overflow-y: scroll;
   scrollbar-width: none;
   width: 70%;
-  color: red;
+  color: var(--text);
   text-align: center;
 `;
 const TextDone = styled.div`
@@ -23,20 +23,22 @@ const TextDone = styled.div`
   scrollbar-width: none;
   width: 70%;
   text-align: center;
+  color: var(--text-done);
+  text-decoration: line-through;
 `;
 const ToDoLi = ({ item, deleteNote, toggleDone }) => {
   return (
     <Wrapper>
       <IconButton size="small" onClick={() => toggleDone(item.id)}>
-        <CheckIcon style={{ fontSize: 15 }} />
+        <CheckIcon style={{ fontSize: 15, color: "var(--accent)" }} />
       </IconButton>
-      {item?.done ? (
-        <TextDone>{item?.content}</TextDone>
+      {item.done ? (
+        <TextDone>{item.content}</TextDone>
       ) : (
-        <TextNotDone>{item?.content}</TextNotDone>
+        <TextNotDone>{item.content}</TextNotDone>
       )}
       <IconButton size="small" onClick={() => deleteNote(item.id)}>
-        <CloseIcon style={{ fontSize: 15 }} />
+        <CloseIcon style={{ fontSize: 15, color: "var(--accent)" }} />
       </IconButton>
     </Wrapper>
   );

@@ -8,6 +8,7 @@ const Img = styled.img`
   max-width: 240px;
   max-height: 240px;
   object-fit: cover;
+  border: 2px solid var(--bg-color);
   border-radius: 3px;
   animation: circling-shadow 4s ease-out 0s infinite normal;
 `;
