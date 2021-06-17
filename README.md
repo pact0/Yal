@@ -23,9 +23,7 @@ So there is no need to worry about losing your current timer or weather api.
 
 ## What's coming next?
 I am plannig to make this fully customizable. This includes:
-* design overhaul
 * setting your own theme
-* setting your own timers
 * changing decorative picture
 * changing icons and links
 * changing search engines and shortcuts
