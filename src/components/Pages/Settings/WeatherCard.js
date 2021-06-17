@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Weather } from "../../../settings/updateSettings";
 const Input = styled.input`
-  color: var(--accent-color);
+  color: var(--text);
   background: transparent;
   border: none;
   text-align: center;
-  caret-color: var(--accent-color2);
   :focus {
     animation: text-flicker 4s ease-out 0s infinite normal;
     animation: box-flicker 4s ease-out 0s infinite normal;
@@ -16,23 +15,32 @@ const Input = styled.input`
   margin: 10px 0px;
 `;
 const Form = styled.form`
-  height: 100%;
-  width: 100%;
   display: flex;
   flex-direction: column;
-  alig-items: center;
+  align-items: center;
   justify-content: center;
 `;
 
 const Button = styled.button`
   background: transparent;
   border: transparent;
-  color: var(--accent-color);
+  color: var(--text);
+  cursor: pointer;
   padding: 10px 0px;
+`;
+
+const Container = styled.div`
+  height: 200px;
+  margin: 60px 0px 0px 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 const WeatherCard = () => {
   const hidden = useSelector((state) => state.settingsPages[1].show);
 
+  const focusRef = useRef(null);
   const [cityValue, setCityValue] = useState("");
   const [apiValue, setApiValue] = useState("");
 
@@ -41,29 +49,42 @@ const WeatherCard = () => {
     Weather.setCityName(cityValue);
     Weather.setKey(apiValue);
   };
+  const keyPressHandle = (e) => {
+    if (e.key === "Enter") {
+      if (cityValue === "" || apiValue === "") {
+        focusRef.current.focus();
+      } else {
+        Weather.setCityName(cityValue);
+        Weather.setKey(apiValue);
+      }
+    }
+  };
   return (
-    <div>
+    <React.Fragment>
       {hidden && (
-        <div>
-          Change your weather settings
+        <Container>
           <Form onSubmit={setWeatherData}>
             <Input
               type="text"
               placeholder="Town"
               value={cityValue}
               onChange={(e) => setCityValue(e.target.value)}
+              ref={(ref) => (focusRef.current = ref)}
+              onKeyPress={keyPressHandle}
             />
             <Input
               type="text"
               placeholder="API key"
               value={apiValue}
+              ref={(ref) => (focusRef.current = ref)}
+              onKeyPress={keyPressHandle}
               onChange={(e) => setApiValue(e.target.value)}
             />
-            <Button>set</Button>
+            <Button type="submit">change</Button>
           </Form>
-        </div>
+        </Container>
       )}
-    </div>
+    </React.Fragment>
   );
 };
 

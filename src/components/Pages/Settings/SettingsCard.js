@@ -1,27 +1,35 @@
 import styled from "@emotion/styled/";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { CSSTransition } from "react-transition-group";
 import { useDispatch, useSelector } from "react-redux";
-import { IconButton } from "@material-ui/core";
+import { CSSTransition } from "react-transition-group";
+
 import { hidePage } from "../../../reducers/pagesReducer";
 import { showOneSetting } from "../../../reducers/settingsReducer";
-import CloseIcon from "@material-ui/icons/Close";
-import AppearanceCard from "./AppearanceCard";
-import WeatherCard from "./WeatherCard";
-import PomodoroCard from "./PomodoroCard";
+import CardSwitchButton from "../../CardSwitchButton";
+
 import AnaliticsCard from "./AnaliticsCard";
+import AppearanceCard from "./AppearanceCard";
+import PomodoroCard from "./PomodoroCard";
+import WeatherCard from "./WeatherCard";
+
 const Box = styled.div`
   height: 450px;
   width: 830px;
   position: absolute;
   top: 50%;
+
   left: 50%;
   margin-right: -50%;
   transform: translate(-50%, -50%);
-  background: black;
-  opacity: 0.9;
+  background: var(--card-color);
+  box-shadow: 0px 2px 25px var(--card-shadow-color);
+  border-radius: 15px;
+  opacity: 0.95;
 `;
 const Container = styled.div`
+  justify-content: space-between;
   display: flex;
   flex-direction: column;
 `;
@@ -30,10 +38,15 @@ const Nav = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 5px 10px;
+  margin: 10px 10px;
 `;
 const Button = styled.button`
   width: 110px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text);
+  font-size: 16px;
   text-align: center;
 `;
 const SettingsCard = () => {
@@ -44,7 +57,7 @@ const SettingsCard = () => {
     <CSSTransition in={hidden} timeout={200} classNames="my-node">
       <React.Fragment>
         {hidden && (
-          <Box>
+          <Box className="BOX">
             <Container>
               <Nav>
                 <Button onClick={() => dispatch(showOneSetting(1))}>
@@ -59,18 +72,19 @@ const SettingsCard = () => {
                 <Button onClick={() => dispatch(showOneSetting(4))}>
                   Analitics
                 </Button>
-                <IconButton
-                  size="small"
-                  color="inherit"
-                  onClick={() => dispatch(hidePage(7))}
+                <CardSwitchButton
+                  value={7}
+                  clickHandler={() => dispatch(hidePage(7))}
                 >
-                  <CloseIcon />
-                </IconButton>
+                  <FontAwesomeIcon icon={faTimes} />
+                </CardSwitchButton>
               </Nav>
+
+              <div style={{ border: "1px var(--text) solid" }}></div>
               <AppearanceCard />
-              <WeatherCard />
-              <PomodoroCard />
               <AnaliticsCard />
+              <PomodoroCard />
+              <WeatherCard />
             </Container>
           </Box>
         )}

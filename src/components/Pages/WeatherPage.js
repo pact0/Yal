@@ -1,6 +1,6 @@
 import styled from "@emotion/styled/";
 import { useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Weather } from "../../settings/updateSettings";
 
 const Container = styled.div`
@@ -56,6 +56,7 @@ const Desc = styled.div`
   font-size: 16px;
 `;
 const WeatherPage = () => {
+  const focusRef = useRef(null);
   const hidden = useSelector((state) => state.pages[1].show);
   const [weather, setWeather] = useState("");
   const [key, setKey] = useState(Weather.getKey());
@@ -69,6 +70,7 @@ const WeatherPage = () => {
   const handleEnterPress = (event) => {
     if (event.key === "Enter") {
       if (cityValue === "" || apiValue === "") {
+        focusRef.current.focus();
       } else {
         Weather.setCityName(cityValue);
         Weather.setKey(apiValue);
@@ -100,7 +102,7 @@ const WeatherPage = () => {
           })
           .catch(function (error) {
             setWeather("");
-            console.log(error);
+            console.log("WRONG CREDENTIALS", error);
           });
     }
     fun();
@@ -135,6 +137,10 @@ const WeatherPage = () => {
             <div>
               <Form>
                 <Input
+                  ref={(ref) => {
+                    focusRef.current = ref;
+                  }}
+                  focus="firstInput"
                   type="text"
                   placeholder="Town"
                   value={cityValue}
@@ -142,6 +148,9 @@ const WeatherPage = () => {
                   onKeyPress={handleEnterPress}
                 />
                 <Input
+                  ref={(ref) => {
+                    focusRef.current = ref;
+                  }}
                   type="text"
                   placeholder="API key"
                   value={apiValue}

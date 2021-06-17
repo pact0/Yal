@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 
 const AnaliticsCard = () => {
   const hidden = useSelector((state) => state.settingsPages[3].show);
-  return <div>{hidden && <div>D</div>}</div>;
+  return <React.Fragment>{hidden && <div>D</div>}</React.Fragment>;
 };
 
 export default AnaliticsCard;

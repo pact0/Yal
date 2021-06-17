@@ -18,11 +18,7 @@ const Button = styled.button`
   transition: all 0.1s ease-in-out;
 `;
 const CardSwitchButton = ({ value, clickHandler, children }) => {
-  return (
-    <div>
-      <Button onClick={() => clickHandler(value)}>{children}</Button>
-    </div>
-  );
+  return <Button onClick={() => clickHandler(value)}>{children}</Button>;
 };
 
 export default CardSwitchButton;
