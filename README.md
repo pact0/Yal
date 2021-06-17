@@ -1,5 +1,8 @@
 # Yal
 ## You AllInOne LandingPage
+### [Preview](https://pact0.github.io/Yal/)
+![Alt Text](https://i.imgur.com/eciVwr5.gif)
+
 Main purpose of this project is to provide a simple yet usefull landing page. All the data is stored locally in the browser. 
 So there is no need to worry about losing your current timer or weather api.
 
