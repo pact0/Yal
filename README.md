@@ -1,5 +1,5 @@
 # Yal
-## You AllInOne LandingPage
+## Your AllInOne LandingPage
 ### [Preview](https://pact0.github.io/Yal/)
 ![Alt Text](https://i.imgur.com/eciVwr5.gif)
 
